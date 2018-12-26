@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="link-host">
+    <serverData>
+      <paths name="link-host">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/www/jktu.ru/academyphp/praktika2" local="$PROJECT_DIR$" web="jktu.ru/academyphp/praktika2" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
