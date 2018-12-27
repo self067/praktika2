@@ -5,7 +5,7 @@
 $connection = new mysqli('jktu.ru', 'selto149_php', 'AcademyPHP2@', 'selto149_php');
 
 $profile= $connection->query('select * from `profile`');
-//$profile=$profile->fetchAll();
+$profile=$profile->fetchAll();
 
 $educations = $connection->query('select * from `educations`');
 $experiences = $connection->query('select * from `experiences`');
