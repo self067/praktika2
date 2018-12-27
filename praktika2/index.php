@@ -1,11 +1,11 @@
 <?php
 
-$connection = new PDO('mysql:host=jktu.ru; dbname=selto149_php; charset=utf8', 'selto149_php', 'AcademyPHP2@');
+//$connection = new PDO('mysql:host=jktu.ru; dbname=selto149_php; charset=utf8', 'selto149_php', 'AcademyPHP2@');
 
 $connection = new mysqli('jktu.ru', 'selto149_php', 'AcademyPHP2@', 'selto149_php');
 
 $profile= $connection->query('select * from `profile`');
-$profile=$profile->fetchAll();
+//$profile=$profile->fetchAll();
 
 $educations = $connection->query('select * from `educations`');
 $experiences = $connection->query('select * from `experiences`');
