@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="linkhost">
+  <component name="PublishConfigData" autoUpload="Always" serverName="link-host">
     <serverData>
-      <paths name="linkhost">
+      <paths name="link-host">
         <serverdata>
           <mappings>
-            <mapping deploy="/academyphp" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/academyphp/praktika2" local="$PROJECT_DIR$" web="/academyphp/praktika2" />
           </mappings>
         </serverdata>
       </paths>

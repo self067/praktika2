@@ -3,12 +3,17 @@
 //$connection = new PDO('mysql:host=jktu.ru; dbname=selto149_php; charset=utf8', 'selto149_php', 'AcademyPHP2@');
 
 $connection = new mysqli('jktu.ru', 'selto149_php', 'AcademyPHP2@', 'selto149_php');
+if ($connection->connect_errno) {
+  printf("Не удалось подключиться: %s\n", $connection->connect_error);
+  exit();
+}
 
-$profile= $connection->query('select * from `profile`');
-$profile=$profile->fetchAll();
 
-$educations = $connection->query('select * from `educations`');
-$experiences = $connection->query('select * from `experiences`');
+$profile= $connection->query('select * from profile');
+$profile=$profile->fetch_all();
+
+$educations = $connection->query('select * from educations');
+$experiences = $connection->query('select * from experiences');
 $skills = $connection->query('select * from `skills`');
 $projects = $connection->query('select * from `projects`');
 $languages = $connection->query('select * from `languages`');
@@ -56,15 +61,15 @@ $interests = $connection->query('select * from `interests`');
         <div class="sidebar-wrapper">
             <div class="profile-container">
                 <img class="profile" src="assets/images/profile.png" alt="" />
-                <h1 class="name"><?=$profile[0]['name']?></h1>
-                <h3 class="tagline"><?=$profile[0]['post']?></h3>
+                <h1 class="name"><?=$profile[0][1]?></h1>
+                <h3 class="tagline"><?=$profile[0][5]?></h3>
             </div><!--//profile-container-->
             
             <div class="contact-container container-block">
                 <ul class="list-unstyled contact-list">
-                    <li class="email"><i class="fa fa-envelope"></i><a href="mailto: yourname@email.com"><?=$profile[0]['email']?></a></li>
-                    <li class="phone"><i class="fa fa-phone"></i><a href="tel:<?=$profile[0]['phone']?>"><?=$profile[0]['phone']?></a></li>
-                    <li class="website"><i class="fa fa-globe"></i><a href="http://themes.3rdwavemedia.com/website-templates/free-responsive-website-template-for-developers/" target="_blank"><?=$profile[0]['site']?></a></li>
+                    <li class="email"><i class="fa fa-envelope"></i><a href="mailto: yourname@email.com"><?=$profile[0][2]?></a></li>
+                    <li class="phone"><i class="fa fa-phone"></i><a href="tel:<?=$profile[0][3]?>"><?=$profile[0][3]?></a></li>
+                    <li class="website"><i class="fa fa-globe"></i><a href="http://themes.3rdwavemedia.com/website-templates/free-responsive-website-template-for-developers/" target="_blank"><?=$profile[0][4]?></a></li>
                 </ul>
             </div><!--//contact-container-->
             <div class="education-container container-block">
@@ -163,22 +168,31 @@ $interests = $connection->query('select * from `interests`');
             </section><!--//skills-section-->
 
             <form action="#" method="POST">
-                <textarea name="comment" id="" cols="30" rows="10" placeholder="Отправить отзыв"></textarea>
+                <textarea name="comment" id="fo_ta" cols="30" rows="5" placeholder="Отправить отзыв"></textarea>
+
+                <input name="name" type="text" id="fo_input">Имя
                 <button>Отправить отзыв</button>
+
+
             </form>
 
             <?php if( $_POST['comment']) {
               $comment = $_POST['comment'];
-              $ip = '';
-              $connection->query("insert into `comments` (`comment`, `ip`) values ( '$comment', '$ip')");
+              $name = $_POST['name'];
+
+              if( !strpos($comment, 'редиска'))
+                  $connection->query("insert into comments (comment, name) values ( '$comment', '$name')");
+
             }
 
-              $commUsers = $connection->query('select * from `comments`');
-                $cnt = 1;
+
+
+              $commUsers = $connection->query('select * from comments order by idate DESC');
+              $cnt = 1;
               foreach($commUsers as $comment){ ?>
 
-            <div style="font-size: 30px; margin: auto;">
-              <?=$cnt++?>.<?=$comment['comment']?>
+            <div style="font-size: 14px; margin: auto;">
+              #<?=$cnt++?>. <?=$comment['name']?>. <?=$comment['idate']?> - <?=$comment['comment']?>
             </div>
 
             <?php

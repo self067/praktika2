@@ -167,7 +167,7 @@ $interests = $connection->query('select * from `interests`');
             <?php if( $_POST['comment']) {
               $comment = $_POST['comment'];
               $ip = '';
-              $connection->query("insert into `comments` (`comment`, `ip`) values ( '$comment', '$ip')");
+              $connection->query("insert into `comments` (`comment`, name) values ( '$comment', '$ip')");
             }
 
               $commUsers = $connection->query('select * from `comments`');
